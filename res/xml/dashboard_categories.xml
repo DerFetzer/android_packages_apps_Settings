@@ -197,6 +197,13 @@
                 android:icon="@drawable/ic_settings_multiuser"
                 />
 
+        <!-- HDMI -->
+        <dashboard-tile
+                android:id="@+id/hdmi_settings"
+                android:title="@string/hdmi"
+                android:fragment="com.android.settings.HdmiSettings"
+                android:icon="@drawable/ic_settings_hdmi" />
+
     </dashboard-category>
 
     <!-- Personalization -->

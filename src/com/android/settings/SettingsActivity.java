@@ -126,6 +126,7 @@ import com.android.settings.wifi.AdvancedWifiSettings;
 import com.android.settings.wifi.SavedAccessPointsWifiSettings;
 import com.android.settings.wifi.WifiSettings;
 import com.android.settings.wifi.p2p.WifiP2pSettings;
+import com.android.settings.HdmiSettings;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
@@ -258,7 +259,8 @@ public class SettingsActivity extends Activity
             R.id.home_settings,
             R.id.status_bar_settings,
             R.id.dashboard,
-            R.id.privacy_settings_cyanogenmod
+            R.id.privacy_settings_cyanogenmod,
+            R.id.hdmi_settings
     };
 
     private static final String[] ENTRY_FRAGMENTS = {
@@ -329,7 +331,8 @@ public class SettingsActivity extends Activity
             LockScreenSettings.class.getName(),
             LiveDisplay.class.getName(),
             DisplayRotation.class.getName(),
-            ContributorsCloudFragment.class.getName()
+            ContributorsCloudFragment.class.getName(),
+            HdmiSettings.class.getName()
     };
 
 
@@ -1273,6 +1276,10 @@ public class SettingsActivity extends Activity
                     if (!hasPrintingSupport) {
                         removeTile = true;
                     }
+                } else if(id == R.id.hdmi_settings){
+                     if (SystemProperties.get("ro.rk.hdmi", "false").equals("false")){
+                        removeTile = true;
+                     }
                 } else if (id == R.id.development_settings) {
                     if (!showDev || um.hasUserRestriction(
                             UserManager.DISALLOW_DEBUGGING_FEATURES)) {
