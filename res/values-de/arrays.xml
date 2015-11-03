@@ -535,4 +535,11 @@
     <item msgid="4608643045752965568">"Pink"</item>
     <item msgid="6131821495505931173">"Rot"</item>
   </string-array>
+  <!-- HDMI -->
+  <string-array name="hdmi_lcd_timeout_entries">
+    <item>10 Sekunden</item>
+    <item>20 Sekunden</item>
+    <item>30 Sekunden</item>
+    <item>Nie</item>
+  </string-array>
 </resources>
