@@ -130,6 +130,8 @@ import com.android.settings.HdmiSettings;
 
 import cyanogenmod.providers.CMSettings;
 
+import cyanogenmod.providers.CMSettings;
+
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
