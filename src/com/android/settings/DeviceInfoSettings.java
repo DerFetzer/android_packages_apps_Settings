@@ -98,6 +98,7 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
     private static final String KEY_MOD_BUILD_DATE = "build_date";
     private static final String KEY_CM_UPDATES = "cm_updates";
     private static final String KEY_CM_LICENSE = "cmlicense";
+    private static final String KEY_HW_VERSION = "hardware_version";
 
     static final int TAPS_TO_BE_A_DEVELOPER = 7;
 
@@ -231,6 +232,9 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
         // If enabled by default, just remove the setting, because it's confusing.
         removePreferenceIfBoolFalse(KEY_ADVANCED_MODE, !getResources().getBoolean(
                 com.android.internal.R.bool.config_advancedSettingsMode));
+
+        removePreferenceIfBoolFalse(KEY_HW_VERSION,
+                !TextUtils.isEmpty(getResources().getString(R.string.hardware_version_value)));
     }
 
     @Override
@@ -261,6 +265,12 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
         } else if (preference.getKey().equals(KEY_BUILD_NUMBER)) {
             // Don't enable developer options for secondary users.
             if (UserHandle.myUserId() != UserHandle.USER_OWNER) return true;
+
+            // Don't enable developer options until device has been provisioned
+            if (Settings.Global.getInt(getActivity().getContentResolver(),
+                    Settings.Global.DEVICE_PROVISIONED, 0) == 0) {
+                return true;
+            }
 
             final UserManager um = (UserManager) getSystemService(Context.USER_SERVICE);
             if (um.hasUserRestriction(UserManager.DISALLOW_DEBUGGING_FEATURES)) return true;
